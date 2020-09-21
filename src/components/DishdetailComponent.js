@@ -34,8 +34,10 @@ class DishDetail extends Component{
       }
 
     render(){
-        console.log("DISHDETAIL RENDER INVOKE")
+        
         const dishdetail = this.props.dishdetail
+        console.log("DISHDETAIL RENDER INVOKE")
+        console.log(dishdetail)
         if (dishdetail != null) {
             return(
                 <div className="container">
@@ -51,8 +53,9 @@ class DishDetail extends Component{
                         </div>
                         <div className="col-12 col-md-5 m-1">
                             <h4>Comments</h4>
-                            {this.renderComments(dishdetail.comments)}
+                            {this.renderComments(this.props.comments)}
                             
+
                         </div>
                     </div>
                 </div>
