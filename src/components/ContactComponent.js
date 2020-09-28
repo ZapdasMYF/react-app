@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem,
-    Button, Row, Col, Label } from 'reactstrap';
+import { Button, Row, Col, Label } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
 
@@ -227,7 +226,7 @@ class Contact extends Component{
                                         placeholder="Email"
                                         className="form-control"
                                         validators={{
-                                            required, minLength: minLength(3), maxLength: maxLength(15)
+                                            required, validEmail
                                         }}
                                         //value={this.state.email}
                                         //onChange={this.handleInputChange}

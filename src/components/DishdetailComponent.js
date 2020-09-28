@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody,
+import { Card, CardImg, CardText, CardBody,
     CardTitle } from 'reactstrap';
+import CommentForm from './CommentFormComponent'
+
 
 class DishDetail extends Component{
     constructor(props){
         super(props);
         console.log("DISHDETAIL CONSTRUCTOR Invoke")
     }
-
 
     renderComments(comments) {
         console.log('dishdetail comment')
@@ -27,11 +28,11 @@ class DishDetail extends Component{
               {com}
             </div>
         );
-      }
+    }
 
-      componentDidMount(){
-        console.log('DishDetail componentDidMount invoke')
-      }
+    componentDidMount(){
+    console.log('DishDetail componentDidMount invoke')
+    }
 
     render(){
         
@@ -41,7 +42,9 @@ class DishDetail extends Component{
         if (dishdetail != null) {
             return(
                 <div className="container">
+                
                     <div className="row">
+
                         <div className="col-12 col-md-5 m-1">
                             <Card>
                                 <CardImg top src={dishdetail.image} alt={dishdetail.name} />
@@ -55,6 +58,9 @@ class DishDetail extends Component{
                             <h4>Comments</h4>
                             {this.renderComments(this.props.comments)}
                             
+                            
+                            <CommentForm/>
+                                                        
 
                         </div>
                     </div>
