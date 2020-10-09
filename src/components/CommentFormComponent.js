@@ -14,9 +14,7 @@ class CommentForm extends Component{
             isComment: false,
         }
         this.toggleCommentForm = this.toggleCommentForm.bind(this);
-        console.log("===================================")
         console.log('CommentForm')
-        console.log("===================================")
     }
     toggleCommentForm() {
         this.setState({
@@ -24,8 +22,10 @@ class CommentForm extends Component{
         });
     }
     handleCommentSubmit(values){
+        console.log(this.props)
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
         console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        //alert('Current State is: ' + JSON.stringify(values));
         this.toggleCommentForm() /**for simple remove this line */
     }
     render(){

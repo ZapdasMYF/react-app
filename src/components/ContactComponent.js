@@ -40,7 +40,7 @@ class Contact extends Component{
         const target = event.target;
         //const value = target.type === 'checkbox' ? target.checked  : target.value;
         var value = ''
-        if (target.type == 'checkbox'){
+        if (target.type === 'checkbox'){
             value =  target.checked
         }else{
             value = target.value

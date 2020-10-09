@@ -37,6 +37,9 @@ class DishDetail extends Component{
     render(){
         
         const dishdetail = this.props.dishdetail
+        //this.props.dishdetail.id,"DISHID"
+        const addComment = this.props.addComment
+
         console.log("DISHDETAIL RENDER INVOKE")
         console.log(dishdetail)
         if (dishdetail != null) {
@@ -59,7 +62,10 @@ class DishDetail extends Component{
                             {this.renderComments(this.props.comments)}
                             
                             
-                            <CommentForm/>
+                            <CommentForm
+                                addComment={addComment}
+                                dishId={dishdetail.id}
+                            />
                                                         
 
                         </div>

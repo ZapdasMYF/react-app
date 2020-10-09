@@ -14,7 +14,11 @@ import LeaderDetail from './LeaderdetailComponent'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 
+import { addComment } from '../redux/ActionCreator';
 
+
+// yeh kya kr rha hai ? data state sy remove kr k props k through pass kr rhe hain ab why?
+//
 const mapStateToProps = state => {
   return {
     dishes: state.dishes,
@@ -23,6 +27,14 @@ const mapStateToProps = state => {
     leaders: state.leaders
   }
 }
+
+
+const mapDispatchToProps = dispatch => ({
+  addComment: (dishId, rating, author, comment) => dispatch(
+    addComment(dishId, rating, author, comment)
+    )
+  });
+
 
 class Main extends Component {
 
@@ -51,7 +63,8 @@ class Main extends Component {
     const DishWithId = ({match}) => {
       return(
           <DishDetail dishdetail={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
-            comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+            comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
+            addComment={this.props.addComment} />
       );
     };
 
@@ -75,7 +88,7 @@ class Main extends Component {
           /> } /> {/*  {HomePage} */}
 
           <Route exact path='/aboutus' component={() => <About leaders={this.props.leaders} />} />
-          <Route path path='/leader/:leaderId/' component={LeaderWithId} />
+          <Route path='/leader/:leaderId/' component={LeaderWithId} />
           
           <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes} />} />
           <Route path='/menu/:dishId/' component={DishWithId} />
@@ -94,7 +107,29 @@ class Main extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Main));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //Route path='/home' component={() => <Home
