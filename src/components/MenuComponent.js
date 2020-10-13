@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay,CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import { Loading } from './LoadingComponent'
 
 // react life cycle 
 // 1 - constructor()
@@ -37,10 +37,22 @@ class Menu extends Component {
     }
      */
 
-    renderMenu(dishes){
+    renderMenu(dishes,isLoading,errMsg){
 
       console.log("renderMenu fuction in MenuComponent")
-
+      console.log(dishes,isLoading,errMsg)
+      console.log("=================================")
+      if (isLoading) {
+        return(
+                <Loading />
+        );
+      }
+      else if (errMsg) {
+          return(
+              <h4>{errMsg}</h4>
+          );
+      }
+      else{
       const menu = dishes.map( (dish) => {
         return (
         <div  className="col-12 col-md-5 m-1">
@@ -61,7 +73,7 @@ class Menu extends Component {
     {menu}
     </div>
   );
-
+}
     }
 
     render() {
@@ -74,10 +86,10 @@ class Menu extends Component {
         //  doubled = [2, 4, 6, 8, 10]
         
         console.log('Menu render invoke')
-        
+        console.log(this.props)
         return (
           <div className="container">
-              {this.renderMenu(this.props.dishes)}
+              {this.renderMenu(this.props.dishes,this.props.dishesLoading,this.props.dishesErrMess)}
           </div>
         );
     }

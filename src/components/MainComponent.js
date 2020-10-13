@@ -14,7 +14,8 @@ import LeaderDetail from './LeaderdetailComponent'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 
-import { addComment } from '../redux/ActionCreator';
+import { addComment , fetchDishes} from '../redux/ActionCreator';
+
 
 
 // yeh kya kr rha hai ? data state sy remove kr k props k through pass kr rhe hain ab why?
@@ -32,8 +33,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   addComment: (dishId, rating, author, comment) => dispatch(
     addComment(dishId, rating, author, comment)
-    )
-  });
+  ),
+  fetchDishes: () => { dispatch(fetchDishes())}
+});
+
+
 
 
 class Main extends Component {
@@ -45,15 +49,22 @@ class Main extends Component {
 
   componentDidMount(){
     console.log('Main componentDidMount invoke')
+    this.props.fetchDishes();
   }
+  
   render(){
 
     console.log('Main Render Invoke')
-
+    console.log("PROPS")
+    console.log(this.props);
     const HomePage = () => {
+      
       return(
+          
           <Home 
-              dish={this.props.dishes.filter((dish) => dish.featured)[0]}
+              dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
+              dishesLoading={this.props.dishes.isLoading}
+              dishesErrMess={this.props.dishes.errMsg}
               promotion={this.props.promotions.filter((promo) => promo.featured)[0]}
               leader={this.props.leaders.filter((leader) => leader.featured)[0]}
           />
@@ -62,8 +73,10 @@ class Main extends Component {
 
     const DishWithId = ({match}) => {
       return(
-          <DishDetail dishdetail={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
+          <DishDetail dishdetail={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
             comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
+            dishesLoading={this.props.dishes.isLoading}
+            dishesErrMess={this.props.dishes.errMsg}
             addComment={this.props.addComment} />
       );
     };
@@ -82,7 +95,9 @@ class Main extends Component {
         <Switch>
           
           <Route path='/home' component={() => <Home
-                dish={this.props.dishes.filter((dish) => dish.featured )[0] } 
+                dish={this.props.dishes.dishes.filter((dish) => dish.featured )[0] } 
+                dishesLoading={this.props.dishes.isLoading}
+                dishesErrMess={this.props.dishes.errMsg}
                 promotion={this.props.promotions.filter((promo) => promo.featured )[0]}
                 leader={this.props.leaders.filter((leader) => leader.featured )[0] }
           /> } /> {/*  {HomePage} */}
@@ -90,7 +105,7 @@ class Main extends Component {
           <Route exact path='/aboutus' component={() => <About leaders={this.props.leaders} />} />
           <Route path='/leader/:leaderId/' component={LeaderWithId} />
           
-          <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes} />} />
+          <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes.dishes} dishesLoading={this.props.dishes.isLoading} dishesErrMess={this.props.dishes.errMsg} />} />
           <Route path='/menu/:dishId/' component={DishWithId} />
           {/*<Route path='/menu/:dishId/' component={() => <DishDetail
               dishdetail={this.state.dishes.filter((dish) => dish.id === 1 )[0]}

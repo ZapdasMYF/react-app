@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle } from 'reactstrap';
 import CommentForm from './CommentFormComponent'
-
+import { Loading } from './LoadingComponent'
 
 class DishDetail extends Component{
     constructor(props){
@@ -39,10 +39,21 @@ class DishDetail extends Component{
         const dishdetail = this.props.dishdetail
         //this.props.dishdetail.id,"DISHID"
         const addComment = this.props.addComment
+        const isLaoding = this.props.dishesLoading
+        const errMsg = this.props.dishesErrMess
 
         console.log("DISHDETAIL RENDER INVOKE")
-        console.log(dishdetail)
-        if (dishdetail != null) {
+        if (isLaoding) {
+            return(
+                    <Loading />
+            );
+        }
+        else if (errMsg) {
+            return(
+                <h4>{errMsg}</h4>
+            );
+        }
+        else if (dishdetail != null) {
             return(
                 <div className="container">
                 

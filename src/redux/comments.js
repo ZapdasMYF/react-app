@@ -2,10 +2,10 @@ import { COMMENTS } from '../shared/comments';
 import * as ActionTypes from './ActionType';
 
 export const Comments = (state = COMMENTS, action) => {
-    console.log("---------------")
+    console.log("-------COMMENTS REDUX--------")
     console.log(action)
     console.log(action.payload)
-    console.log("---------------")
+    console.log("-----------------------------")
     switch (action.type){
         
         case ActionTypes.ADD_COMMENT:

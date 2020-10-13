@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle} from 'reactstrap';
-
+import { Loading } from './LoadingComponent';
 
 class Home extends Component{
     
-    renderItems(item){
-        return(
-            <Card>
-                <CardImg src={item.image} alt={item.name} />
-                <CardBody>
-                    <CardTitle>{item.name}</CardTitle>
-                    {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
-                    <CardText>{item.description}</CardText>
-                </CardBody>
-            </Card>
-        );
+    renderItems(item,isLoading,errMsg){
+        if (isLoading) {
+            return(
+                    <Loading />
+            );
+        }
+        else if (errMsg) {
+            return(
+                <h4>{errMsg}</h4>
+            );
+        }
+        else{ 
+            return(
+                <Card>
+                    <CardImg src={item.image} alt={item.name} />
+                    <CardBody>
+                        <CardTitle>{item.name}</CardTitle>
+                        {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
+                        <CardText>{item.description}</CardText>
+                    </CardBody>
+                </Card>
+            );
+        }
     }
 
 
@@ -23,13 +35,15 @@ class Home extends Component{
         const dish = this.props.dish;
         const leader = this.props.leader;
         const promo = this.props.promotion;
-        
+        const isLoading = this.props.dishesLoading
+        const errmsg = this.props.dishesErrMess
+       
         return(
 
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-12 col-md m-1">
-                    {this.renderItems(dish)}
+                    {this.renderItems(dish,isLoading,errmsg)}
                 </div>
                 <div className="col-12 col-md m-1">
                     {this.renderItems(leader)}
