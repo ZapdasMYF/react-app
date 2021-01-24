@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle} from 'reactstrap';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseurl';
 
 class Home extends Component{
     
@@ -19,7 +20,7 @@ class Home extends Component{
         else{ 
             return(
                 <Card>
-                    <CardImg src={item.image} alt={item.name} />
+                    <CardImg src={baseUrl + item.image} alt={item.name} />
                     <CardBody>
                         <CardTitle>{item.name}</CardTitle>
                         {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
@@ -49,7 +50,7 @@ class Home extends Component{
                     {this.renderItems(leader)}
                 </div>
                 <div className="col-12 col-md m-1">
-                    {this.renderItems(promo)}
+                    {this.renderItems(promo,this.props.promotionLoading,this.props.promotionFailed)}
                 </div>
             </div>
         </div>

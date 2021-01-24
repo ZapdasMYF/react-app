@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody,
     CardTitle } from 'reactstrap';
 import CommentForm from './CommentFormComponent'
 import { Loading } from './LoadingComponent'
+import { baseUrl } from '../shared/baseurl'
 
 class DishDetail extends Component{
     constructor(props){
@@ -38,7 +39,7 @@ class DishDetail extends Component{
         
         const dishdetail = this.props.dishdetail
         //this.props.dishdetail.id,"DISHID"
-        const addComment = this.props.addComment
+        const postComment = this.props.postComment
         const isLaoding = this.props.dishesLoading
         const errMsg = this.props.dishesErrMess
 
@@ -61,7 +62,7 @@ class DishDetail extends Component{
 
                         <div className="col-12 col-md-5 m-1">
                             <Card>
-                                <CardImg top src={dishdetail.image} alt={dishdetail.name} />
+                                <CardImg top src={baseUrl+dishdetail.image} alt={dishdetail.name} />
                                 <CardBody>
                                     <CardTitle>{dishdetail.name}</CardTitle>
                                     <CardText>{dishdetail.description}</CardText>
@@ -74,7 +75,7 @@ class DishDetail extends Component{
                             
                             
                             <CommentForm
-                                addComment={addComment}
+                                postComment={postComment}
                                 dishId={dishdetail.id}
                             />
                                                         

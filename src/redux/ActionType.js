@@ -1,4 +1,14 @@
-export const ADD_COMMENT = 'ADD_COMMENT';
+
 export const DISHES_LOADING = 'DISHES_LOADING';
 export const DISHES_FAILED = 'DISHES_FAILED';
 export const ADD_DISHES = 'ADD_DISHES';
+
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const FAILED_COMMENTS = 'FAILED_COMMENTS';
+export const LOADING_COMMENTS = 'LOADING_COMMENTS';
+export const ADD_COMMENTS = 'ADD_COMMENTS';
+
+
+export const ADD_PROMO = 'ADD_PROMO';
+export const FAILED_PROMO = 'FAILED_PROMO';
+export const LOADING_PROMO = 'LOADING_PROMO';
