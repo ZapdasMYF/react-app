@@ -60,10 +60,12 @@ class Contact extends Component{
     }
 
     handleSubmit(value) { //event
-        console.log('Current State is: ' + JSON.stringify(value));
-        alert('Current State is: ' + JSON.stringify(value));
-        //event.preventDefault();
-        this.props.resetFeedbackForm()
+        // console.log('Current State is: ' + JSON.stringify(value));
+        // alert('Current State is: ' + JSON.stringify(value));
+        // //event.preventDefault();
+        // this.props.resetFeedbackForm()
+        this.props.postFeedback(value);
+        this.props.resetFeedbackForm();
     }
 
     validate(firstname, lastname, telnum, email) {

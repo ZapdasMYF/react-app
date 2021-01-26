@@ -14,7 +14,7 @@ import LeaderDetail from './LeaderdetailComponent'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 
-import { postComment , fetchDishes ,fetchComments , fetchPromos} from '../redux/ActionCreator';
+import { postComment , fetchDishes ,fetchComments , fetchPromos , postFeedback} from '../redux/ActionCreator';
 import { actions } from 'react-redux-form';
 
 
@@ -37,6 +37,7 @@ const mapDispatchToProps = dispatch => ({
   fetchComments: () => { dispatch(fetchComments())},
   fetchDishes: () => { dispatch(fetchDishes())},
   fetchPromos: () => { dispatch(fetchPromos())},
+  postFeedback: (feedback) => dispatch(postFeedback(feedback)),
   resetFeedbackForm : () => {dispatch( actions.reset('feedback') )}
 });
 
@@ -120,7 +121,9 @@ class Main extends Component {
           />} />
           */}
 
-          <Route exact path='/contactus' component={() => <Contact resetFeedbackForm = {this.props.resetFeedbackForm} />} />
+          <Route exact path='/contactus' component={() => <Contact 
+                                                          resetFeedbackForm = {this.props.resetFeedbackForm}
+                                                          postFeedback={this.props.postFeedback} />} />
           
           <Redirect to="/home" />
         </Switch>
